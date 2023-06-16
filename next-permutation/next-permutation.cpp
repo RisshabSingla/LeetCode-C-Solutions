@@ -11,26 +11,24 @@ public:
             }
         }
         if(pivot == -1){
-            sort(nums.begin(), nums.end());
+            reverse(nums.begin(), nums.end());
             return;
         }   
-        cout<<"Pivot is: "<<pivot<<endl;
+        // cout<<"Pivot is: "<<pivot<<endl;
         int min_greater = INT_MAX;
         int index = 0;
-        for(int j = pivot; j<size; j++){
+        for(int j = size-1; j>=pivot; j--){
             if(nums[j]> nums[pivot]){
-                if(nums[j]<min_greater){
-                    min_greater = nums[j];
-                    index = j;
-                }
+                swap(nums[j], nums[pivot]);
+                break;
             }
         }
-        cout<<"index is: "<<index<<endl;
-        swap(nums[pivot], nums[index]);
+        // cout<<"index is: "<<index<<endl;
+        // swap(nums[pivot], nums[index]);
         sort(nums.begin()+pivot+1, nums.end());
-        for(int i =0; i<size; i++){
-            cout<<nums[i]<<" ";
-        }
-        cout<<endl;
+        // for(int i =0; i<size; i++){
+        //     cout<<nums[i]<<" ";
+        // }
+        // cout<<endl;
     }
 };
