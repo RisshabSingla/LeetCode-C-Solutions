@@ -20,20 +20,16 @@ public:
         // }
         // return max_count;
 
-        // Approach 2: Using Dynamic Programming
-
+        // Approach 2: Using Dynamic Programming 
 
         int size = nums.size();
-        unordered_map<int,int> dp[size+1];
+        vector<vector<int>> dp(size, vector<int>(2000, 0));
+        // unordered_map<int,int> dp[size+1];
         int ans = 0;
         for(int i = 1; i<size; i++){
             for(int j = 0; j<i; j++){
-                int diff = nums[i] - nums[j];
-                int count = 1;
-                if(dp[j].count(diff)> 0){
-                    count = dp[j][diff];
-                }
-                dp[i][diff] = count+1;
+                int diff = nums[i] - nums[j] + 500;
+                dp[i][diff] = max(2, dp[j][diff]+1);
                 ans = max(ans, dp[i][diff]);
             }
         }
