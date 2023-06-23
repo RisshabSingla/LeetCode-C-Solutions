@@ -23,7 +23,7 @@ public:
         // Approach 2: Using Dynamic Programming 
 
         int size = nums.size();
-        vector<vector<int>> dp(size, vector<int>(2000, 0));
+        vector<vector<int>> dp(size, vector<int>(1001, 0));
         // unordered_map<int,int> dp[size+1];
         int ans = 0;
         for(int i = 1; i<size; i++){
