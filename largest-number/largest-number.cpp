@@ -1,7 +1,9 @@
 class Solution {
 public:
-    static bool comp(string &a, string &b){
-        return (a+b)>(b+a);
+    static bool comp(string a, string b){
+        string str1 = a+b;
+        string str2 = b+a;
+        return str1>str2;
     }
     string largestNumber(vector<int>& nums) {
         int size = nums.size();
@@ -17,8 +19,9 @@ public:
             return "0";
         }
         string ans = "";
-        for(auto i: numbers){
-            ans+=i;
+        for(int i = 0; i<size; i++){
+            ans = ans + numbers[i];
+            // cout<<numbers[i]<<" ";
         }
         return ans;
     }
