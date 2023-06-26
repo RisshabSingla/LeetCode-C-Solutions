@@ -10,29 +10,18 @@ public:
         if(size == 1){
             return to_string(nums[0]);
         }
-        
         vector<string> numbers(size);
         for(int i = 0; i<size; i++){
             numbers[i] = to_string(nums[i]);
         }
         sort(numbers.begin(), numbers.end(), comp);
+        if(numbers[0] == "0"){
+            return "0";
+        }
         string ans = "";
         for(int i = 0; i<size; i++){
-            // if(i == 0 && numbers[i] == "0"){
-            //     continue;
-            // }
             ans = ans + numbers[i];
-            cout<<numbers[i]<<" ";
-        }
-        bool other = false;
-        for(int i = 0; i<ans.length(); i++){
-            if(ans[i] != '0'){
-                other = true;
-                break;
-            }
-        }
-        if(!other){
-            return "0";
+            // cout<<numbers[i]<<" ";
         }
         return ans;
     }
