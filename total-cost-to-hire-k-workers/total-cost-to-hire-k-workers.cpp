@@ -29,30 +29,35 @@ public:
             count--;
         }
 
-        cout<<"Front is: ";
-        printQueue(front);
-        cout<<"Back is: ";
-        printQueue(back);
+        // cout<<"Front is: ";
+        // printQueue(front);
+        // cout<<"Back is: ";
+        // printQueue(back);
         
         long long ans = 0;
-
-        for(int i = 0; i<k; i++){
-            int frontTop = front.top();
-            int backTop = back.top();
+        int frontTop = front.top();
+        int backTop = back.top();    
+        for(int i = 0; i<k; i++){  
+            // int frontTop = front.top();
+            // int backTop = back.top();    
             if(frontTop <= backTop){
                 ans+= frontTop;
                 front.pop();
+                // frontTop = front.top();
                 if(index1<=index2){
                     front.push(costs[index1]);
                     index1++;
                 }
+                frontTop = front.top();
             }else{
                 ans+= backTop;
                 back.pop();
+                // backTop = back.top();
                 if(index1<=index2){
                     back.push(costs[index2]);
                     index2--;
                 }
+                backTop = back.top();
             }
         }
         return ans;
