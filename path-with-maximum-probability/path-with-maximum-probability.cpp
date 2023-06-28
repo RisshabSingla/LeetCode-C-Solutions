@@ -3,13 +3,10 @@ public:
     double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
         vector<vector<pair<int, double>>> graph(n);
         for (int i = 0; i < edges.size(); i++) {
-            int u = edges[i][0];
-            int v = edges[i][1];
-            double p = succProb[i];
-            graph[u].push_back({v, p});
-            graph[v].push_back({u, p});
+            graph[edges[i][0]].push_back({edges[i][1], succProb[i]});
+            graph[edges[i][1]].push_back({edges[i][0], succProb[i]});
         }
-        
+
         vector<double> maxp(n, 0.00);
         maxp[start] = 1.00;
 
@@ -26,12 +23,9 @@ public:
             }
 
             for (auto neighbor : graph[node]) {
-                int adj = neighbor.first;
-                double edgeProb = neighbor.second;
-                double newProb = prob * edgeProb;
-                if (newProb > maxp[adj]) {
-                    maxp[adj] = newProb;
-                    pq.push({newProb, adj});
+                if (prob * neighbor.second > maxp[neighbor.first]) {
+                    maxp[neighbor.first] = prob * neighbor.second;
+                    pq.push({prob * neighbor.second, neighbor.first});
                 }
             }
         }
