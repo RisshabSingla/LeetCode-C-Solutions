@@ -1,7 +1,7 @@
 class Solution {
 public:
     int satisfied = 0;
-    void helper(vector<vector<int>>& requests, int index, int &n, vector<int> &numbers, int &req_size, int count){
+    void helper(vector<vector<int>>& requests, int index, int n, vector<int> &numbers, int req_size, int count){
         if(index == req_size){
             for(int i = 0; i<n; i++){
                 if(numbers[i] != 0){
