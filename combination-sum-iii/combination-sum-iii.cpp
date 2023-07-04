@@ -1,6 +1,12 @@
 class Solution {
 public:
     void helper(int k, int n, vector<vector<int>> &ans, vector<int> comb, int index){
+        if(n<0){
+            return;
+        }
+        if(k<0){
+            return;
+        }
         if(k == 0){
             if(n == 0){
                 ans.push_back(comb);
