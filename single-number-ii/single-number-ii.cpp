@@ -49,12 +49,5 @@ public:
         }
         return (int)ans;
 
-
-
-        // Approach 4: Bit Manipulation
-
-
-        return 0;
-
     }
 };
