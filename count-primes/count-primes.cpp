@@ -1,7 +1,7 @@
 class Solution {
 public:
-    void findPrimes(long long n, vector<int> &primes){
-        // vector<int> primes;
+    int findPrimes(long long n){
+        int count = 0;
         vector<bool> sieve(n, true);
         sieve[0] = false;
         sieve[1] = false;
@@ -9,18 +9,20 @@ public:
             if(sieve[i]==false){
                 continue;
             }
-            primes.push_back(i);
+            count++;
             for(long long j=i*i;j<n;j+=i){
                 sieve[j]=false;
             }
         }
+        return count;
     }
     int countPrimes(int n) {
         if(n == 0 || n == 1){
             return 0;
         }
-        vector<int> primes;
-        findPrimes(n, primes);
-        return primes.size();
+        return findPrimes(n);
+        // vector<int> primes;
+        // findPrimes(n, primes);
+        // return primes.size();
     }
 };
