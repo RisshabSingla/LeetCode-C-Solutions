@@ -162,11 +162,11 @@ public:
             }
 
 
-            for (auto it = dp.begin(); it != dp.end(); ++it) {
-                int comb = it->first | val;
+            for (auto it: dp) {
+                int comb = it.first | val;
                 if (dp.find(comb) == dp.end() || 
-                    dp[comb].size() > 1 + dp[it->first].size()){
-                        dp[comb] = it->second;
+                    dp[comb].size() > 1 + dp[it.first].size()){
+                        dp[comb] = it.second;
                         dp[comb].push_back(i);
                 }
             }
