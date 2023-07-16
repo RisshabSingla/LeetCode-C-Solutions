@@ -94,62 +94,16 @@ public:
 
 
         // Memoization:
-        int skills = req_skills.size();
-        int no_people = people.size();
-        int possible = pow(2, skills);
-        
-        unordered_map<string, int> mapping;
-        for(int i = 0; i<skills; i++){
-            mapping[req_skills[i]] = i;
-        }
-
-        vector<int> skill_person(no_people);
-        for(int i = 0; i<no_people; i++){
-            int size = people[i].size();
-            int val = 0;
-            for(int j = 0; j<size; j++){
-                int index = mapping[people[i][j]];
-                val = val | (1<<index);
-            }
-            skill_person[i] = val;
-        }
-
-
-        int req_mask = (1<<skills)-1;
-        vector<vector<int>> dp(possible,vector<int>(no_people+1 ,-1));
-        vector<vector<int>> choice(possible,vector<int>(no_people+1 ,-1));
-
-        solve(skill_person,0, 0, dp, choice, no_people, req_mask);
-
-        vector<int> ans;
-        int mask = 0;
-        for(int i = 0; i<no_people; i++){
-            if(choice[mask][i] == 1){
-                ans.push_back(i);
-                mask = mask| skill_person[i];
-            }
-            if(mask == req_mask){
-                break;
-            }
-        }
-
-        return ans;
-
-
-        // Dynamic Programming Approach
-
 
         // int skills = req_skills.size();
         // int no_people = people.size();
         // int possible = pow(2, skills);
         
-
         // unordered_map<string, int> mapping;
         // for(int i = 0; i<skills; i++){
         //     mapping[req_skills[i]] = i;
         // }
 
-        
         // vector<int> skill_person(no_people);
         // for(int i = 0; i<no_people; i++){
         //     int size = people[i].size();
@@ -162,50 +116,65 @@ public:
         // }
 
 
-        // // cout<<"Skills of people are: ";
-        // // for(auto i: skill_person){
-        // //     cout<<i<<" ";
-        // // }
-        // // cout<<endl;
+        // int req_mask = (1<<skills)-1;
+        // vector<vector<int>> dp(possible,vector<int>(no_people+1 ,-1));
+        // vector<vector<int>> choice(possible,vector<int>(no_people+1 ,-1));
 
-        // vector<vector<int> > dp(possible+1,vector<int>(0,0));
+        // solve(skill_person,0, 0, dp, choice, no_people, req_mask);
+
+        // vector<int> ans;
+        // int mask = 0;
         // for(int i = 0; i<no_people; i++){
-        //     int val = skill_person[i];
-        //     // cout<<"\nFor person: "<<i<<endl;
-        //     if(dp[val].size() == 0){
-        //         dp[val].push_back(i);
+        //     if(choice[mask][i] == 1){
+        //         ans.push_back(i);
+        //         mask = mask| skill_person[i];
         //     }
-        //     for(int j = 0; j<possible ; j++){
-        //         if(dp[j].size() == 0){
-        //             continue;
-        //         }
-        //         int combination = j | val;
-        //         // cout<<"Size of combination is: "<<dp[combination].size()<<endl;
-        //         if(dp[combination].size() == 0 || 
-        //             dp[combination].size() > dp[j].size() + 1){
-        //             vector<int> v(dp[j]);
-        //             dp[combination] = v;
-        //             dp[combination].push_back(i);
-                    
-        //             // cout<<"Vector at comb:"<<combination<<" is: ";
-        //             // for(auto i: dp[combination]){
-        //             //     cout<<i<<" ";
-        //             // }
-        //             // cout<<endl;
-        //         }
+        //     if(mask == req_mask){
+        //         break;
+        //     }
+        // }
+
+        // return ans;
 
 
-        //     } 
-        // } 
+        // Dynamic Programming Approach
 
-        // // for(auto i: dp){
-        // //     for(auto j: i){
-        // //         cout<<j<<" ";
-        // //     }
-        // //     cout<<endl;
-        // // }
+        int skills = req_skills.size();
+        int no_people = people.size();
+        int possible = pow(2, skills);
+        
+        unordered_map<string, int> mapping;
+        for(int i = 0; i<skills; i++){
+            mapping[req_skills[i]] = i;
+        }
 
-        // return dp[possible-1];
 
+        unordered_map<int, vector<int>> dp;
+        dp.reserve(1 << skills);
+        dp[0] = {};
+
+        for(int i = 0; i<no_people; i++){
+            int size = people[i].size();
+            int val = 0;
+            for(int j = 0; j<size; j++){
+                int index = mapping[people[i][j]];
+                val = val | (1<<index);
+            }
+
+
+            for (auto it = dp.begin(); it != dp.end(); ++it) {
+                int comb = it->first | val;
+                if (dp.find(comb) == dp.end() || 
+                    dp[comb].size() > 1 + dp[it->first].size()){
+                        dp[comb] = it->second;
+                        dp[comb].push_back(i);
+                }
+            }
+        }
+
+        return dp[possible-1];
+
+
+        
     }
 };
