@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void helper(vector<int> nums, int index, int n ,
+    void helper(vector<int> &nums, int index, int n ,
             vector<vector<int>> &ans ){
         if(index >= n){
             // cout<<"Pushing inside ans"<<endl;
