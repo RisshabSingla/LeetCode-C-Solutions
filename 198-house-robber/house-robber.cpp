@@ -19,7 +19,7 @@ public:
 
     int helperDP(vector<int>&nums){
         int size = nums.size();
-        vector<vector<int>> dp(2, vector<int>(size, 0));
+        // vector<vector<int>> dp(2, vector<int>(size, 0));
         int prev_inc = nums[0];
         int prev_not_inc = 0;
 
