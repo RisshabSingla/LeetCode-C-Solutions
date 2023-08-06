@@ -30,7 +30,39 @@ public:
         helper(new_a, ans);
         ans.push_back(b);
     }
+
+
+    vector<vector<int>> rev(TreeNode*root){
+        vector<vector<int>> ans;
+        if(!root){
+            return ans;
+        }
+        queue<TreeNode*> q;
+        q.push(root);
+        vector<int> temp;
+        while (!q.empty()) {
+            int size = q.size();
+            for(int i = 0; i < size; i++) {
+                auto tempNode = q.front();
+                if (tempNode->left){
+                    q.push(tempNode->left);
+                }
+                if (tempNode->right){
+                    q.push(tempNode->right);
+                }
+                temp.push_back(tempNode->val);
+                q.pop();
+            }
+            ans.push_back(temp);
+            temp.clear();
+        }   
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
+        return rev(root);
+        
         vector<vector<int>> ans;
         if(!root){
             return ans;
