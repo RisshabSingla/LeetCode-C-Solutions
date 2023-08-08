@@ -23,6 +23,8 @@ public:
         return true;
     }
     bool isStrictlyPalindromic(int n) {
+        return false;
+        
         for(int i = 2; i<=n-2; i++){
             string str = base(n, i);
             if(!checkPalindrome(str)){
@@ -31,5 +33,8 @@ public:
             // cout<<"base: "<<i<<" str: "<<str<<endl; 
         }
         return true;
+
+
+
     }
 };
