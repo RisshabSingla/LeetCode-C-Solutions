@@ -6,6 +6,11 @@ public:
         int right = nums.size()-1;
         while(left<=right){
             int mid = left + (right-left)/2;
+            if(nums[left]<=nums[right]){
+                // array is completely sorted
+                min_element = min(min_element, nums[left]);
+                break;
+            }
             if(nums[left]<=nums[mid]){
                 // left part is sorted
                 min_element = min(min_element, nums[left]);
