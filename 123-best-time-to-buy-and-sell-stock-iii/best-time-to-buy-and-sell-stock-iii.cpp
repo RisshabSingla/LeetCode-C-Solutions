@@ -65,6 +65,36 @@ public:
     }
 
 
+    int tabulationopt(vector<int>& prices){
+        int n = prices.size();
+        vector<vector<int>> curr(vector<vector<int>>(2, vector<int>(3, 0)));
+        vector<vector<int>> after(vector<vector<int>>(2, vector<int>(3, 0)));
+        for(int index = n-1; index>=0; index--){
+            for(int buy = 0; buy<=1; buy++){
+                for(int cap = 1; cap<=2; cap++){
+                    if(buy){
+                        int a = -prices[index] + after[0][cap];
+                        int b = after[1][cap];
+                        curr[buy][cap] = max(a,b);
+                        // return dp[index][canBuy][transactions];
+                    }else{
+                        int a = prices[index] + after[1][cap-1];
+                        int b = after[0][cap];
+                        curr[buy][cap] = max(a,b);
+                    }
+                }
+            }
+            after = curr;
+        }
+        return after[1][2];
+    }
+
+    
+
+
+
+
+
 
 
     int maxProfit(vector<int>& prices) {
@@ -76,7 +106,7 @@ public:
         // return memoization(prices, 0, 1, 2, dp);
 
 
-        return tabulation(prices);
+        return tabulationopt(prices);
 
     }
 };
