@@ -42,11 +42,41 @@ public:
     }
 
 
+    int tabulation(vector<int>& prices){
+        int n = prices.size();
+        vector<vector<vector<int>>> dp(n+1, vector<vector<int>>(2, vector<int>(3, 0)));
+        for(int index = n-1; index>=0; index--){
+            for(int buy = 0; buy<=1; buy++){
+                for(int cap = 1; cap<=2; cap++){
+                    if(buy){
+                        int a = -prices[index] + dp[index+1][0][cap];
+                        int b = dp[index+1][1][cap];
+                        dp[index][buy][cap] = max(a,b);
+                        // return dp[index][canBuy][transactions];
+                    }else{
+                        int a = prices[index] + dp[index+1][1][cap-1];
+                        int b = dp[index+1][0][cap];
+                        dp[index][buy][cap] = max(a,b);
+                    }
+                }
+            }
+        }
+        return dp[0][1][2];
+    }
+
+
+
 
     int maxProfit(vector<int>& prices) {
         // return recursive(prices, 0, true, 2);
-        int n = prices.size();
-        vector<vector<vector<int>>> dp(n+1, vector<vector<int>>(2, vector<int>(3, INT_MAX)));
-        return memoization(prices, 0, 1, 2, dp);
+
+
+        // int n = prices.size();
+        // vector<vector<vector<int>>> dp(n+1, vector<vector<int>>(2, vector<int>(3, INT_MAX)));
+        // return memoization(prices, 0, 1, 2, dp);
+
+
+        return tabulation(prices);
+
     }
 };
