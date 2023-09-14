@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-    bool dfs(map<string, vector<string>> &mapping, vector<string> &ans, string curr, int count , int tickets){
+    bool dfs(unordered_map<string, vector<string>> &mapping, vector<string> &ans, string curr, int count , int tickets){
         if(curr == "###"){
             return false;
         }
@@ -27,15 +27,16 @@ public:
 
     vector<string> findItinerary(vector<vector<string>>& tickets) {
         vector<string> ans;
-        map<string, vector<string>> mapping;
+        unordered_map<string, vector<string>> mapping;
+        sort(tickets.begin(), tickets.end());
         for(int i = 0; i<tickets.size(); i++){
             mapping[tickets[i][0]].push_back(tickets[i][1]);
         }
 
-        map<string, vector<string> >::iterator it;
-        for(it = mapping.begin(); it != mapping.end(); it++){
-            sort(it->second.begin(), it->second.end());
-        }
+        // map<string, vector<string> >::iterator it;
+        // for(it = mapping.begin(); it != mapping.end(); it++){
+        //     sort(it->second.begin(), it->second.end());
+        // }
 
         // for(auto i : mapping){
         //     cout<<i.first<<" :";
