@@ -3,7 +3,6 @@ public:
     int minMovesToMakePalindrome(string s) {
         int front = 0;
         int last = s.length()-1;
-        int mid = (last+1)/2;
         int count = 0;
         while(front<last){
             if(s[front] == s[last]){
@@ -16,13 +15,13 @@ public:
                         break;
                     }
                 }
-                if( i == front){
+                if(i == front){
                     swap(s[front], s[front+1]);
                     count++;
                     continue;
                 }
-                for(int j = i; j<last; j++){
-                    swap(s[j], s[j+1]);
+                for(; i<last; i++){
+                    swap(s[i], s[i+1]);
                     count++;
                 }
                 front++;
