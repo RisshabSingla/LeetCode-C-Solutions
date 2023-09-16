@@ -92,13 +92,13 @@ public:
         
         while(low<=high){
             int mid = low + (high-low)/2;
-            cout<<"Checking for: "<<mid;
+            // cout<<"Checking for: "<<mid;
             if(checkValid(heights, mid, rows, cols)){
-                cout<<" Valid"<<endl;
+                // cout<<" Valid"<<endl;
                 ans = min(ans, mid);
                 high = mid-1;
             }else{
-                cout<<" Invalid"<<endl;
+                // cout<<" Invalid"<<endl;
                 low = mid+1;
             }
         }   
