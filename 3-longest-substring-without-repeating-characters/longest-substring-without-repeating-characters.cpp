@@ -8,18 +8,18 @@ public:
         int left = 0;
         int right = 0;
         int max_length = 0;
-        set<char> freq;
-        // vector<int> freq(26,0);
+        // set<char> freq;
+        vector<int> freq(256,0);
         while(right<s.length()){
-            // while(right<slen && freq[s[right]-'a'] == 0){
-            //     freq[s[right]-'a']++;
-            //     right++;
-            // }
-
-            while(right<slen && freq.count(s[right]) == 0){
-                freq.insert(s[right]);
+            while(right<slen && freq[s[right]] == 0){
+                freq[s[right]]++;
                 right++;
             }
+
+            // while(right<slen && freq.count(s[right]) == 0){
+            //     freq.insert(s[right]);
+            //     right++;
+            // }
             // cout<<"String is: ";
             // for(int i = left; i<=right; i++){
             //     cout<<s[i];
@@ -30,16 +30,16 @@ public:
             if(right == slen){
                 break;
             }
-            // while(left<right && freq[s[right]-'a'] != 0){
-            //     freq[s[left]-'a']--;
-            //     left++;
-            // }
-
-            while(left<right && freq.count(s[right]) == 1){
-                freq.erase(s[left]);
-                // freq[s[left]-'a']--;
+            while(left<right && freq[s[right]] != 0){
+                freq[s[left]]--;
                 left++;
             }
+
+            // while(left<right && freq.count(s[right]) == 1){
+            //     freq.erase(s[left]);
+            //     // freq[s[left]-'a']--;
+            //     left++;
+            // }
             // cout<<"String is: ";
             // for(int i = left; i<right; i++){
             //     cout<<s[i];
