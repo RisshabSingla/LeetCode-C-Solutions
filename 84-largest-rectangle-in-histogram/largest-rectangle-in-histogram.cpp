@@ -48,21 +48,50 @@ public:
 
         // Approach 2: Using stack
         
+        // int maxArea = INT_MIN;
+        // int cols = heights.size();
+        
+        // vector<int> prev = calcPrev(heights,cols);
+        // vector<int> next = calcNext(heights,cols);
+        // for(int i = 0; i<cols; i++){
+        //     if(next[i] == -1){
+        //         next[i] = cols;
+        //     }
+        //     int breadth = next[i] - prev[i]-1;
+        //     int area = heights[i]*breadth;
+        //     // cout<<"Area is: "<<area<<endl;
+        //     maxArea = max(maxArea, area);
+        // }
+        
+        // return maxArea;
+
+        
+
+
+        // Approach 3: Optimized Stack
+
+        stack<int> s;
         int maxArea = INT_MIN;
         int cols = heights.size();
-        
-        vector<int> prev = calcPrev(heights,cols);
-        vector<int> next = calcNext(heights,cols);
-        for(int i = 0; i<cols; i++){
-            if(next[i] == -1){
-                next[i] = cols;
+
+        for(int i = 0;i<=cols; i++){
+
+            while(!s.empty() && (i == cols || heights[s.top()] >= heights[i])){
+                int h = heights[s.top()];
+                s.pop();
+                int width;
+                if(s.empty()){
+                    width = i;
+                }else{
+                    width = i-s.top()-1;
+                }
+                maxArea = max(maxArea, width*h);
             }
-            int breadth = next[i] - prev[i]-1;
-            int area = heights[i]*breadth;
-            // cout<<"Area is: "<<area<<endl;
-            maxArea = max(maxArea, area);
+            s.push(i);
         }
-        
+
         return maxArea;
+
+         
     }
 };
