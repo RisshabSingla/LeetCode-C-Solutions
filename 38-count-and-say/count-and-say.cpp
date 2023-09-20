@@ -1,6 +1,6 @@
 class Solution {
 public:
-    string convert(string rec){
+    string convert(string &rec){
 
         string ans = "";
         char ch = rec[0];
