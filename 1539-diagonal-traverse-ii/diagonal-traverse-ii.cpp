@@ -28,20 +28,39 @@ public:
         // return ans;
         // This approach will not work 
 
+        // Approach 1:
+        // vector<vector<int>> numbers;
+        // int rows = nums.size();
+        // for(int i = 0; i<rows; i++){
+        //     for(int j = 0; j<nums[i].size(); j++){
+        //         numbers.push_back({(i+j), i, nums[i][j]});
+        //     }
+        // }
 
-        vector<vector<int>> numbers;
+        // sort(numbers.begin(), numbers.end(), comp);
+        // vector<int> ans;
+        // for(int i = 0; i<numbers.size(); i++){
+        //     ans.push_back(numbers[i][2]);
+        //     // cout<<endl;
+        // }
+        // return ans;
+
+
+        // Approach 2: 
+
         int rows = nums.size();
-        for(int i = 0; i<rows; i++){
+        map<int, vector<int>> mapping;
+        for(int i = rows-1; i>=0; i--){
             for(int j = 0; j<nums[i].size(); j++){
-                numbers.push_back({(i+j), i, nums[i][j]});
+                mapping[i+j].push_back(nums[i][j]);
             }
         }
 
-        sort(numbers.begin(), numbers.end(), comp);
         vector<int> ans;
-        for(int i = 0; i<numbers.size(); i++){
-            ans.push_back(numbers[i][2]);
-            // cout<<endl;
+        for(auto i: mapping){
+            for(auto j: i.second){
+                ans.push_back(j);
+            }
         }
         return ans;
     }
