@@ -28,7 +28,7 @@ public:
         // return ans;
         // This approach will not work 
 
-        // Approach 1:
+        // Approach 1: Using vector sort
         // vector<vector<int>> numbers;
         // int rows = nums.size();
         // for(int i = 0; i<rows; i++){
@@ -46,21 +46,41 @@ public:
         // return ans;
 
 
-        // Approach 2: 
+        // Approach 2: Using maps
 
-        int rows = nums.size();
-        map<int, vector<int>> mapping;
-        for(int i = rows-1; i>=0; i--){
-            for(int j = 0; j<nums[i].size(); j++){
-                mapping[i+j].push_back(nums[i][j]);
+        // int rows = nums.size();
+        // map<int, vector<int>> mapping;
+        // for(int i = rows-1; i>=0; i--){
+        //     for(int j = 0; j<nums[i].size(); j++){
+        //         mapping[i+j].push_back(nums[i][j]);
+        //     }
+        // }
+
+        // vector<int> ans;
+        // for(auto i: mapping){
+        //     for(auto j: i.second){
+        //         ans.push_back(j);
+        //     }
+        // }
+        // return ans;
+
+
+
+        // Approach 3: Using priority queue
+
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+
+        for(int i=0;i<nums.size();i++){
+            for(int j=0;j<nums[i].size();j++){
+                pq.push({i+j, j});
             }
         }
-
         vector<int> ans;
-        for(auto i: mapping){
-            for(auto j: i.second){
-                ans.push_back(j);
-            }
+        while(!pq.empty()){
+            int j = pq.top().second;
+            int i = pq.top().first - j;
+            pq.pop();
+            ans.push_back(nums[i][j]);
         }
         return ans;
     }
