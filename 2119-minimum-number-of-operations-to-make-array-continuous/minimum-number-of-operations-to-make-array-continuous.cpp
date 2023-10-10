@@ -1,19 +1,36 @@
 class Solution {
 public:
     int minOperations(vector<int>& nums) {
-        int n=nums.size();
-        set<int>s(nums.begin(),nums.end());
-        vector<int>temp(s.begin(),s.end());
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        vector<int> duplicate(n, 0);
+        for(int i = 1; i < n; i++)
+        {
+            if(nums[i] == nums[i - 1])
+            {
+                duplicate[i] = duplicate[i - 1] + 1;
+            }
+            else
+            {
+                duplicate[i] = duplicate[i - 1];
+            }
+        }
+        int ans = INT_MAX;
+        for(int i = 0; i < n; i++)
+        {
+            int tmp = i;
+            int s = nums[i] + n - 1;
+            auto it = lower_bound(nums.begin(), nums.end(), s) - nums.begin();
 
-        int ans=1e9;
-        for(int i=0;i<temp.size();i++){
-            int low=temp[i];
-            int high=low+n-1;
-             int j=upper_bound(temp.begin(),temp.end(),high)-temp.begin();
-             int withinrange=j-i;
-             int outofrange=n-withinrange;
-            ans=min(ans,outofrange);
-       }
-       return ans;
+            if(it == n)it--;
+            if(nums[it] > s)it--;
+
+            tmp += n - it - 1;
+            tmp += duplicate[it] - duplicate[i];
+
+            ans = min(tmp, ans);
+        }
+
+        return ans;
     }
 };
