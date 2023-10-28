@@ -2,10 +2,10 @@ class Solution {
 public:
     int countVowelPermutation(int n) {
         int mod = 1e9+7;
-        vector<vector<long>> dp(n, vector<long>(5,0));
-        for(int i = 0; i<5; i++){
-            dp[0][i] = 1;
-        }
+        // vector<vector<long>> dp(n, vector<long>(5,0));
+        // for(int i = 0; i<5; i++){
+        //     dp[0][i] = 1;
+        // }
         vector<long> prev(5,1);
         vector<long> next(5,1);
         /*
@@ -29,6 +29,5 @@ public:
             (ans+= next[i])%=mod;
         }
         return ans;
-
     }
 };
