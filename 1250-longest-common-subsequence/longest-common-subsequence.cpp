@@ -20,7 +20,6 @@ public:
         if(index1 == len1 || index2 == len2){
             return 0;
         }
-        int a = 0;
         int b = 0;
         int c = 0;
 
@@ -29,11 +28,11 @@ public:
         }
 
         if(text1[index1] == text2[index2]){
-            a = memo(text1, text2, index1+1, index2+1, len1, len2) + 1;
+            return dp[index1][index2] = memo(text1, text2, index1+1, index2+1, len1, len2) + 1;
         }
         b = memo(text1, text2, index1+1, index2, len1, len2);
         c = memo(text1, text2, index1, index2+1, len1, len2);
-        return dp[index1][index2] = max({a,b,c});
+        return dp[index1][index2] = max({b,c});
     }
 
 
