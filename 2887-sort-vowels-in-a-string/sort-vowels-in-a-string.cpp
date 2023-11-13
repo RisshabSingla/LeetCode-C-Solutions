@@ -2,19 +2,23 @@ class Solution {
 public:
     string sortVowels(string s) {
         vector<char> vowels;
-        for (char c : s) {
-            if (string("aeiouAEIOU").find(c) != string::npos) {
-                vowels.push_back(c);
+        int slen = s.length();
+        string all = "aeiouAEIOU";
+        for (int i = 0; i<slen; i++) {
+            if (all.find(s[i]) != string::npos) {
+                vowels.push_back(s[i]);
             }
         }
         sort(vowels.begin(), vowels.end(), greater<char>());
-        string result;
-        for (char c : s) {
-            if (string("aeiouAEIOU").find(c) != string::npos) {
-                result += vowels.back();
-                vowels.pop_back();
+        string result = "";
+        int n_vowels = vowels.size();
+        for (int i = 0; i<slen; i++) {
+            if (all.find(s[i]) != string::npos) {
+                result += vowels[n_vowels-1];
+                // vowels.pop_back();
+                n_vowels--;
             } else {
-                result += c;
+                result += s[i];
             }
         }
         return result; 
