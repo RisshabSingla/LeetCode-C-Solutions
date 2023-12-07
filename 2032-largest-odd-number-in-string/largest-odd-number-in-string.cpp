@@ -1,6 +1,6 @@
 class Solution {
 public:
-    string largestOddNumber(string num) {
+    string largestOddNumber(string& num) {
         // cout<<"Num is: "<<num<<endl;
         // if(num.length()==0){
         //     return num;
