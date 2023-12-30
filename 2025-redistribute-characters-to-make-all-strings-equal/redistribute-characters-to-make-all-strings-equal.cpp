@@ -1,10 +1,10 @@
 class Solution {
 public:
     bool makeEqual(vector<string>& words) {
-        vector<int> freq(26,0);
+        int freq[26] = {0};
         for(auto word: words){
-            for(int i = 0; i<word.length(); i++){
-                freq[word[i]-'a']++;
+            for(auto ch: word){
+                ++freq[ch-'a'];
             }
         }
         int size = words.size();
