@@ -12,19 +12,19 @@
 class Solution {
 public:
     int ans = 0;
-    void dfs(TreeNode* root, vector<TreeNode*>&ancestor){
-        if(!root){
-            return;
-        }
-        for(int i = 0; i<ancestor.size(); i++){
-            ans = max(ans, 
-            abs(ancestor[i]->val - root->val));
-        }
-        ancestor.push_back(root);
-        dfs(root->left, ancestor);
-        dfs(root->right, ancestor);
-        ancestor.pop_back();
-    }
+    // void dfs(TreeNode* root, vector<TreeNode*>&ancestor){
+    //     if(!root){
+    //         return;
+    //     }
+    //     for(int i = 0; i<ancestor.size(); i++){
+    //         ans = max(ans, 
+    //         abs(ancestor[i]->val - root->val));
+    //     }
+    //     ancestor.push_back(root);
+    //     dfs(root->left, ancestor);
+    //     dfs(root->right, ancestor);
+    //     ancestor.pop_back();
+    // }
 
     void dfs2(TreeNode* root, int minAncestor, int maxAncestor){
         if(!root){
