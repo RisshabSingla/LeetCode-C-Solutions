@@ -25,9 +25,21 @@ public:
         dfs(root->right, ancestor);
         ancestor.pop_back();
     }
+
+    void dfs2(TreeNode* root, int minAncestor, int maxAncestor){
+        if(!root){
+            return;
+        }
+        int a = min(minAncestor, root->val);
+        int b = max(maxAncestor, root->val);
+        ans = max(ans, abs(a-b));
+        dfs2(root->left, a, b);
+        dfs2(root->right, a,b);
+    }
     int maxAncestorDiff(TreeNode* root) {
-        vector<TreeNode*> ancestor;
-        dfs(root, ancestor);
+        // vector<TreeNode*> ancestor;
+        // dfs(root, ancestor);
+        dfs2(root, root->val, root->val);
         return ans;
     }
 };
