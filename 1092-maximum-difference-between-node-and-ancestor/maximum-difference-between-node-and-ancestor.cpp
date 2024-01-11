@@ -12,7 +12,7 @@
 class Solution {
 public:
     int ans = 0;
-    void dfs(TreeNode* root, vector<TreeNode*> ancestor){
+    void dfs(TreeNode* root, vector<TreeNode*>&ancestor){
         if(!root){
             return;
         }
