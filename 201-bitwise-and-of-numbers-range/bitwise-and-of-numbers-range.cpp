@@ -7,12 +7,9 @@ public:
         if(left == right){
             return left;
         }
-
-        int common = 0;
         int ans = 0;
         for(int i = 31; i>=0; i--){
             if(left>>i == right>>i){
-                common++;
                 if(left>>i & 1 == 1){
                     // int a = (1<<i);
                     // cout<<"A is: "<<a<<"\n";
