@@ -28,18 +28,29 @@ public:
             // cout<<"\n";
             pq.pop();
             // k++;
-            for(int i = 0; i<adj_list[top[1]].size(); i++){
-                int node = adj_list[top[1]][i][0];
-                int c =  adj_list[top[1]][i][1];
-                int new_c = c + top[2];
-                // if(node == dest)
-                // cout<<"Pushed: "<<top[0]+1<<" node: "<<node<<" cost: "<<new_c<<"\n";
-                if(node == dst && top[0]<=k +1){
-                    costs[node] = min(new_c,costs[node]);
+            // for(int i = 0; i<adj_list[top[1]].size(); i++){
+            //     int node = adj_list[top[1]][i][0];
+            //     int c =  adj_list[top[1]][i][1];
+            //     int new_c = c + top[2];
+            //     // if(node == dest)
+            //     // cout<<"Pushed: "<<top[0]+1<<" node: "<<node<<" cost: "<<new_c<<"\n";
+            //     if(node == dst && top[0]<=k +1){
+            //         costs[node] = min(new_c,costs[node]);
+            //     }
+            //     if(costs[node] > new_c && top[0] + 1 <= k){
+            //         pq.push({top[0]+1, node, new_c});
+            //         costs[node] = min(new_c,costs[node]);
+            //     }
+            // }
+
+            for(auto &i: adj_list[top[1]]){
+                int new_c = i[1] + top[2];
+                if(i[0] == dst && top[0]<=k +1){
+                    costs[i[0]] = min(new_c,costs[i[0]]);
                 }
-                if(costs[node] > new_c && top[0] + 1 <= k){
-                    pq.push({top[0]+1, node, new_c});
-                    costs[node] = min(new_c,costs[node]);
+                if(costs[i[0]] > new_c && top[0] + 1 <=k){
+                    pq.push({top[0] +1, i[0], new_c});
+                    costs[i[0]] = min(new_c,costs[i[0]]);
                 }
             }
         }
