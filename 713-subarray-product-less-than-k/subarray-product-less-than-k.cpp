@@ -8,7 +8,6 @@ public:
         long long prod = 1;
         int front = 0;
         int ans = 0;
-        int n = nums.size();
         for(int i = 0; i<nums.size(); i++){
             prod*= nums[i];
             count++;
@@ -19,9 +18,6 @@ public:
             }
             if(prod == 0){
                 prod = 1;
-            }
-            if(count < 0){
-                count = 0;
             }
             ans+= count;
         }
