@@ -6,18 +6,18 @@ public:
         double ans = y/x;
         return ans;
     }
-    static bool comp(vector<int>&a, vector<int>&b){
-        if(a[0] == b[0]){
-            return a[1] < b[1];
-        }
-        return a[0] < b[0];
-    }
+    // static bool comp(vector<int>&a, vector<int>&b){
+    //     if(a[0] == b[0]){
+    //         return a[1] < b[1];
+    //     }
+    //     return a[0] < b[0];
+    // }
     int maxPoints(vector<vector<int>>& points) {
         int n = points.size();
         if(n == 1){
             return 1;
         }
-        sort(points.begin(), points.end(), comp);
+        sort(points.begin(), points.end());
         int count = 0;
         for(int i = 0; i<n; i++){
             unordered_map<double,int> mp;
