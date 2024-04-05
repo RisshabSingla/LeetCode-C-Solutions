@@ -20,7 +20,7 @@ public:
 
         stack<char> stk;
         
-        for (char& c : str) {
+        for (char c : str) {
             if (!stk.empty() && abs(c - stk.top()) == 32) {
                 stk.pop();
             } else {
