@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> indegree(numCourses, 0);
-        map<int, vector<int>> adj_list;
+        unordered_map<int, vector<int>> adj_list;
         for(auto &i: prerequisites){
             indegree[i[0]]++;
             adj_list[i[1]].push_back(i[0]);
