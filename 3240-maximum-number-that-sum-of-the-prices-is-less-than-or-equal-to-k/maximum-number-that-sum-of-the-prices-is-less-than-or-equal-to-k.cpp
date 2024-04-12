@@ -1,5 +1,6 @@
 class Solution {
 public:
+    long long bitSum[64];
     long long findCost(long long num, int x){
         long long count = 0;
         long long mul = 1;
@@ -11,7 +12,7 @@ public:
         return count;
     }
 
-    void populateBitSum(long long number, vector<long long> &bitSum){
+    void populateBitSum(long long number){
         if(number == 0){
             return;
         }
@@ -26,14 +27,13 @@ public:
         }
         // cout<<"Number is: "<<number<<"\n";
         long long MSB = log2(number);
-
         long long count = (1LL<<MSB);
         bitSum[MSB]+= (number - count+1);
 
         for(int i = 0; i<MSB; i++){
             bitSum[i]+= (count)/2;
         }
-        populateBitSum(number-count, bitSum);
+        populateBitSum(number-count);
     }
 
 
@@ -61,8 +61,8 @@ public:
         long long ans = 0;
         while(start <= end){
             long long mid = start + (end-start)/2;
-            vector<long long> bitSum(64, 0);
-            populateBitSum(mid, bitSum);
+            memset(bitSum, 0, sizeof(bitSum));
+            populateBitSum(mid);
             long long res = 0;
             for(int i = 0; i<63; i++){
                 if((i+1)%x == 0){
