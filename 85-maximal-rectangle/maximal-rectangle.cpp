@@ -26,7 +26,6 @@ public:
         int m = matrix[0].size();
         vector<int> height(m, 0);
         for(int i = 0; i<n; i++){
-            
             for(int j = 0; j<m; j++){
                 if(matrix[i][j] == '1'){
                     height[j]++;
@@ -36,8 +35,7 @@ public:
             }
             int area = calcArea(height,m);
             // cout<<"For i: "<<i<<" area: "<<area<<endl;
-            maxArea = max(area, maxArea);
-            
+            maxArea = max(area, maxArea);   
         }
         return maxArea;
     }
