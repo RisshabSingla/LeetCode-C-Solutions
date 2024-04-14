@@ -20,9 +20,6 @@ public:
         int n = nums.size();
         long long count = 0;
         unordered_map<int, vector<int>> mp;
-        // for(int i = 0; i<n; i++){
-        //     mp[nums[i]].push_back(i);
-        // }
         stack<int> stk;
         vector<int> nextBiggerIndex(n, -1);
         for(int i = 0; i<n; i++){
@@ -50,12 +47,10 @@ public:
             }
             int size = mp[nums[i]].size();
             int index = lower_bound(mp[nums[i]].begin(),mp[nums[i]].end(), canStartFrom) - mp[nums[i]].begin();
-            // cout<<"Index is: "<<index<<"\n";
             long long possible = size - index + 1;
             count+= possible;
             mp[nums[i]].push_back(i);
         }
         return count;
-        // return count;
     }
 };
