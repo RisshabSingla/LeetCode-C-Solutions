@@ -1,9 +1,10 @@
 class TrieNode{
 public:
-    vector<TrieNode*> children;
+    TrieNode* zero;
+    TrieNode* one;
     TrieNode(){
-        children.resize(2);
-        children[0] = children[1] = NULL;
+        zero = NULL;
+        one = NULL;
     }
 };
 
@@ -13,15 +14,15 @@ public:
         TrieNode* parent = root;
         for(int i = 31; i>=0; i--){
             if((number>>i) & 1){
-                if(parent->children[1] == NULL){
-                    parent->children[1] = new TrieNode();
+                if(parent->one == NULL){
+                    parent->one = new TrieNode();
                 }
-                parent = parent->children[1];
+                parent = parent->one;
             }else{
-                if(parent->children[0] == NULL){
-                    parent->children[0] = new TrieNode();
+                if(parent->zero == NULL){
+                    parent->zero = new TrieNode();
                 }
-                parent = parent->children[0];
+                parent = parent->zero;
             }
         }
     }
@@ -31,22 +32,22 @@ public:
         for(int i = 31; i>=0; i--){
             if((number>>i) & 1){
                 // want zero
-                if(parent->children[0] == NULL){
+                if(parent->zero == NULL){
                     // taking one
-                    parent = parent->children[1];
+                    parent = parent->one;
                     other = other | (1<<i);
                 }else{
                     // taking zero
-                    parent = parent->children[0];
+                    parent = parent->zero;
                 }
             }else{
                 // want one
-                if(parent->children[1] == NULL){
+                if(parent->one == NULL){
                     // taking zero
-                    parent = parent->children[0];
+                    parent = parent->zero;
                 }else{
                     // taking one
-                    parent = parent->children[1];
+                    parent = parent->one;
                     other = other | (1<<i);
                 }
             }
