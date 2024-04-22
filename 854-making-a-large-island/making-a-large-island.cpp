@@ -40,41 +40,40 @@ public:
         return a + b + c + d + 1;
     }
 
-    int findArea2(vector<vector<int>>& parent, unordered_map<int,int>& parentArea, int i, int j, int n, int m){
-        int above = 0;
-        int below = 0;
-        int left = 0;
-        int right = 0;
+    int findArea2(vector<vector<int>>& parent,
+                  unordered_map<int, int>& parentArea, int i, int j, int n,
+                  int m) {
         unordered_set<int> parents;
-        if(i-1>=0 && !parents.count(parent[i-1][j])){
-            above = parentArea[parent[i-1][j]];
-            parents.insert(parent[i-1][j]);
+        if (i - 1 >= 0) {
+            parents.insert(parent[i - 1][j]);
         }
 
-        if(i+1 < n && !parents.count(parent[i+1][j])){
-            below = parentArea[parent[i+1][j]];
-            parents.insert(parent[i+1][j]);
+        if (i + 1 < n) {
+            parents.insert(parent[i + 1][j]);
         }
 
-        if(j+1 < m && !parents.count(parent[i][j+1])){
-            right = parentArea[parent[i][j+1]];
-            parents.insert(parent[i][j+1]);
+        if (j + 1 < m) {
+            parents.insert(parent[i][j + 1]);
         }
 
-        if(j-1 >=0 && !parents.count(parent[i][j-1])){
-            left = parentArea[parent[i][j-1]];
-            parents.insert(parent[i][j-1]);
+        if (j - 1 >= 0) {
+            parents.insert(parent[i][j - 1]);
         }
 
-        return 1 + above + below + left + right;
+        int area = 1;
+        for (auto& i : parents) {
+            area += parentArea[i];
+        }
+
+        return area;
     }
 
     int largestIsland(vector<vector<int>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
-        
+
         vector<vector<int>> parent(n, vector<int>(m, -1));
-        unordered_map<int,int> parentArea;
+        unordered_map<int, int> parentArea;
         int parentIndex = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
@@ -86,20 +85,19 @@ public:
             }
         }
 
+        if(parentIndex == 0){
+            return 1;
+        }
+
         queue<pair<int, int>> q;
-        bool onePresent = false;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == 0) {
                     q.push({i, j});
-                } else {
-                    onePresent = true;
                 }
             }
         }
-        if (!onePresent) {
-            return 1;
-        }
+        
         if (q.size() == 0) {
             return n * m;
         }
