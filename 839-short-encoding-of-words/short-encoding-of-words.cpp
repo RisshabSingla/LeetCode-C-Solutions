@@ -39,7 +39,7 @@ public:
     }
     int minimumLengthEncoding(vector<string>& words) {
         TrieNode* root = new TrieNode();
-        for (auto i : words) {
+        for (auto &i : words) {
             reverse(i.begin(), i.end());
             insert(root, i);
         }
