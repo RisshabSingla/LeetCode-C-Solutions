@@ -20,7 +20,6 @@ public:
         
     }
     int minDays(vector<int>& arr, int m, int k) {
-        
         long long total_req = (long long)(m)*k;
         long long n = arr.size();
         if(n < total_req){
