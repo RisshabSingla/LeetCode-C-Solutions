@@ -36,6 +36,9 @@ public:
         int mini = INT_MAX;
         for(int i = 1; i<indexes.size(); i++){
             mini = min(mini, indexes[i]-indexes[i-1]);
+            if(mini == 1){
+                break;
+            }
         }
         if(maxi == 0){
             return {-1,-1};
