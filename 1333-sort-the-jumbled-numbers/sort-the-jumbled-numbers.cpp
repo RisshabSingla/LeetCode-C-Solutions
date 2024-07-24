@@ -18,9 +18,9 @@ public:
         return nNumber;
     }
     vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
-        for (auto i : nums) {
-            findMappedValue(i, mapping);
-        }
+        // for (auto i : nums) {
+        //     findMappedValue(i, mapping);
+        // }
         sort(nums.begin(), nums.end(), [&](const int& a, const int& b) -> bool {
             int n1 = findMappedValue(a, mapping);
             int n2 = findMappedValue(b, mapping);
