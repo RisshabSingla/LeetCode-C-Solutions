@@ -4,7 +4,7 @@ public:
         vector<pair<long long, long long>> times(n, {INT_MAX, INT_MAX});
         times[0] = {0, INT_MAX};
         vector<vector<int>> adjList(n);
-        for (auto i : edges) {
+        for (auto &i : edges) {
             adjList[i[0] - 1].push_back(i[1] - 1);
             adjList[i[1] - 1].push_back(i[0] - 1);
         }
